@@ -3,6 +3,11 @@ import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import { prisma } from "./lib/prisma"
 
+// async function getDayOfWeek(date: string): Promise<number> {
+//   const result = await prisma.$queryRaw`SELECT EXTRACT(DOW FROM ${date}::timestamp) as day_of_week`;
+//   return result[0].day_of_week;
+// }
+
 export async function appRoutes(app: FastifyInstance) {
 
   // Criar Habito
@@ -149,7 +154,7 @@ export async function appRoutes(app: FastifyInstance) {
           JOIN habits H
             ON H.id = HWD.habit_id
           WHERE
-            HWD.week_day = cast(strftime('%w', D.date/1000.0, 'unixepoch') as int)
+            HWD.week_day = SELECT EXTRACT(DOW FROM D.date::timestamp) as day_of_week
             AND H.created_at <= D.date
         ) as amount
       FROM days D
