@@ -3,7 +3,7 @@ import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import { prisma } from "./lib/prisma"
 
-export async function appRoutes(app) {
+export async function appRoutes(app: FastifyInstance) {
 
   // Criar Habito
   app.post('/habits', async (request) => {
