@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "18"
+  },
   "scripts": {
     "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "build": "tsup src",
     "vercel-build": "npx prisma migrate deploy"
   },
   "keywords": [],
@@ -15,6 +20,7 @@
     "@prisma/client": "^4.8.1",
     "dayjs": "^1.11.10",
     "fastify": "^4.11.3",
+    "tsup": "^8.0.2",
     "zod": "^3.22.4"
   },
   "devDependencies": {
